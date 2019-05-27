@@ -1,0 +1,37 @@
+<section class="section">
+    <div class="container">
+      <h1 class="title">Editing User #{{ userId }}</h1>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" type="text" placeholder="Text input" formControlName="username" [ngClass]="{ 'is-danger': submitted && f.username.errors }">
+          </div>
+          <p class="help is-danger" *ngIf="submitted && f.username.errors">Username is required</p>
+        </div>
+
+        <div class="field">
+          <label class="label">Role</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" type="text" placeholder="Text input" formControlName="role" [ngClass]="{ 'is-danger': submitted && f.role.errors }">
+          </div>
+          <p class="help is-danger" *ngIf="submitted && f.username.errors">Role is required</p>
+        </div>
+
+        <!-- <div class="field">
+          <label class="label">Categories</label>
+          <div class="control has-icons-left has-icons-right">
+            <div class="select is-multiple" [ngClass]="{ 'is-danger': submitted && f.categories.errors }">
+              <select multiple formControlName="categories">
+                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+              </select>
+            </div>
+          </div>
+          <p class="help is-danger" *ngIf="submitted && f.categories.errors">Select at least one category</p>
+        </div> -->
+        <div class="container">
+            <button type="submit" class="button is-info">Submit</button>
+        </div>
+      </form>
+    </div>
+  </section>

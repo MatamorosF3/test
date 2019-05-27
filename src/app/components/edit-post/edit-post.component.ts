@@ -46,7 +46,7 @@ export class EditPostComponent implements OnInit {
       .subscribe(params => {
         let postId = params['postId'];
         if (!postId) {
-          this.router.navigate(['']);
+          this.router.navigate(['/post']);
         }
         this.postId = postId;
         this.postService.getPost(postId).subscribe( (post: Post) => {
@@ -61,7 +61,7 @@ export class EditPostComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     console.log(this.editForm.value)
-    
+
     if(this.editForm.valid){
       this.postService.editPost(this.editForm.value)
       .subscribe( data => {

@@ -41,11 +41,11 @@ export class AddPostComponent implements OnInit {
   onSubmit(){
     this.submitted = true;
     console.log(this.addForm.value)
-    
+
     if(this.addForm.valid){
       this.postService.addPost(this.addForm.value)
       .subscribe( data => {
-        this.router.navigate(['']);
+        this.router.navigate(['/post']);
       });
     }
   }

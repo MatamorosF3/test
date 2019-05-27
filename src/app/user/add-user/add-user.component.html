@@ -7,14 +7,14 @@
         <div class="control has-icons-left has-icons-right">
           <input class="input" type="text" placeholder="Text input" formControlName="username" [ngClass]="{ 'is-danger': submitted && f.username.errors }">
         </div>
-        <p class="help is-danger" *ngIf="submitted && f.username.errors">username is required</p>
+        <p class="help is-danger" *ngIf="submitted && f.username.errors">Username is required. Make sure you do not use space, underscore or period. Length: 4-20</p>
       </div>
       <div class="field">
         <label class="label">password</label>
         <div class="control has-icons-left has-icons-right">
           <input class="input" type="password" placeholder="password input" formControlName="password" [ngClass]="{ 'is-danger': submitted && f.password.errors }">
         </div>
-        <p class="help is-danger" *ngIf="submitted && f.password.errors">Password is required</p>
+        <p class="help is-danger" *ngIf="submitted && f.password.errors">Password is required. Make sure you do not use space, underscore or period. Length: 4-20</p>
       </div>
       <div class="field">
         <label class="label">Role</label>

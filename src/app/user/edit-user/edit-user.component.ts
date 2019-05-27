@@ -35,7 +35,7 @@ export class EditUserComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       id: [],
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.pattern('^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')]],
       role: ['', Validators.required]
     });
 
@@ -46,7 +46,7 @@ export class EditUserComponent implements OnInit {
       .subscribe(params => {
         let userId = params['userId'];
         if (!userId) {
-          this.router.navigate(['']);
+          this.router.navigate(['/user']);
         }
         this.userId = userId;
         this.userService.getUser(userId).subscribe( (user: User) => {

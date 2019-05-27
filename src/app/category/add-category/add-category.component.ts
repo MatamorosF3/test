@@ -56,7 +56,7 @@ export class AddCategoryComponent implements OnInit {
       if(this.addForm.valid){
         this.categoryService.addCategory(this.addForm.value)
         .subscribe( data => {
-          this.router.navigate(['']);
+          this.router.navigate(['/category']);
         });
       }
     }

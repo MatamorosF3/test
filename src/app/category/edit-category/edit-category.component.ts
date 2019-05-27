@@ -46,7 +46,7 @@ export class EditCategoryComponent implements OnInit {
       .subscribe(params => {
         let categoryId = params['categoryId'];
         if (!categoryId) {
-          this.router.navigate(['']);
+          this.router.navigate(['category']);
         }
         this.categoryId = categoryId;
         this.categoryService.getCategory(categoryId).subscribe( (category: Category) => {

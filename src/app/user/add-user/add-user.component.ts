@@ -30,9 +30,9 @@ export class AddUserComponent implements OnInit {
 
     this.addForm = this.formBuilder.group({
       id: [],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      role: ['', Validators.required]
+      username: ['', [Validators.required, Validators.pattern('^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')]],
+      password: ['', [Validators.required, Validators.pattern('^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')]],
+      role: ['', Validators.required, ]
     });
   }
 
@@ -44,7 +44,7 @@ export class AddUserComponent implements OnInit {
     if (this.addForm.valid) {
       this.userService.addUser(this.addForm.value)
         .subscribe(data => {
-          this.router.navigate(['']);
+          this.router.navigate(['/user']);
         });
     }
   }

@@ -25,7 +25,7 @@ export class AuthenticationService {
 
     login(username: string, password: string) {
         console.log("Api URL");
-        console.log(apiUrl);
+        console.log(this.apiUrl);
 
         return this.http.post<any>(`${this.apiUrl}/login`, { username, password })
             .pipe(map(user => {

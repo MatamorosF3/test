@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/user.service';
 import { User } from 'src/app/models/User';
 
+import { AuthenticationService } from 'src/app/authentication.service';
+
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -17,6 +19,8 @@ export class EditUserComponent implements OnInit {
   editForm: FormGroup;
   submitted: boolean = false;
   user: User;
+  index: number;
+  role: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +39,9 @@ export class EditUserComponent implements OnInit {
       role: ['', Validators.required]
     });
 
+
+   // this.editForm.controls.role.setValue(["VIEWER", "EDITOR", "ADMIN"].indexOf("VIEWER"));
+
     this.route.queryParams
       .subscribe(params => {
         let userId = params['userId'];
@@ -43,6 +50,8 @@ export class EditUserComponent implements OnInit {
         }
         this.userId = userId;
         this.userService.getUser(userId).subscribe( (user: User) => {
+           this.role = user.role;
+           user.role =  (["VIEWER", "EDITOR", "ADMIN"].indexOf(user.role)).toString();
           this.editForm.patchValue(user);
         })
       });
@@ -50,7 +59,11 @@ export class EditUserComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    console.log(this.editForm.value)
+    if (this.index){
+      this.editForm.controls.role.setValue(["VIEWER", "EDITOR", "ADMIN"][this.index]);
+    }else{
+      this.editForm.controls.role.setValue(["VIEWER", "EDITOR", "ADMIN"].indexOf(this.role));
+    }
 
     if(this.editForm.valid){
       this.userService.editUser(this.editForm.value)
@@ -58,6 +71,10 @@ export class EditUserComponent implements OnInit {
         this.router.navigate(['']);
       });
     }
+  }
+
+  updateRole(event) {
+    this.index = event.target.value;
   }
 
   get f() { return this.editForm.controls; }
